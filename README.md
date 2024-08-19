@@ -150,14 +150,14 @@ function setDMValues(ob, property, value) {
 
 **Example Response Object**
 ```json
-{
-    "residential":"Mountain View",
-    "suburb":"Tshwane Ward 48",
-    "town":"Centurion",
-    "county":"City of Tshwane Metropolitan Municipality",
-    "state":"Gauteng",
-    "ISO3166-2-lvl4":"ZA-GP",
-    "postcode":"0157",
+{   
+    "road":"Mountain View Road",
+    "suburb":"Maitland Garden Village",
+    "city":"Cape Town",
+    "county":"City of Cape Town",
+    "state":"Western Cape",
+    "ISO3166-2-lvl4":"ZA-WC",
+    "postcode":"7450",
     "country":"South Africa",
     "country_code":"za"
 }
