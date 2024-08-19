@@ -148,6 +148,21 @@ function setDMValues(ob, property, value) {
 
 ![](images/CustomEventHandler.png)
 
+**Example Response Object**
+```json
+{
+    "residential":"Mountain View",
+    "suburb":"Tshwane Ward 48",
+    "town":"Centurion",
+    "county":"City of Tshwane Metropolitan Municipality",
+    "state":"Gauteng",
+    "ISO3166-2-lvl4":"ZA-GP",
+    "postcode":"0157",
+    "country":"South Africa",
+    "country_code":"za"
+}
+```
+
 ## Page
 1. Drag a *TextBox* control to the page
 2. Add a unique class to the control *Classes* property
