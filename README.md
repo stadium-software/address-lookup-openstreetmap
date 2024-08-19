@@ -159,7 +159,7 @@ function setDMValues(ob, property, value) {
    2. MaxResultsCount (int): By default the search results list is limited to 10 items. Add another number if you wish to increase or decrease this limit
    3. CountryCodes: By default the search will be performed across all countries in the world. If you wish to limit the countries from which search results are retrieved, create a *List* of countries to search using the [ISO 3166-1 country codes](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) and provide the *List* in this parameter. 
 
-**LIst Values Example**
+**CountryCodes List Example Values**
 ```json
 ["za","gb"]
 ```
