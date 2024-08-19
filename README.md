@@ -4,6 +4,10 @@ A search API looks up a location from a textual description or address.
 
 This module integrates the free Nominatim API of OpenStreetMap. Please make sure you adhere to the [usage policies](https://operations.osmfoundation.org/policies/nominatim/). 
 
+
+https://github.com/user-attachments/assets/8284de7b-7015-49fd-af5a-355c7c66f75a
+
+
 ## Version 
 1.0 - initial
 
