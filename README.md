@@ -194,6 +194,7 @@ The CSS below is required for the correct functioning of the module. Some elemen
 1. Open the CSS file called [*address-lookup-variables.css*](address-lookup-variables.css) from this repo
 2. Adjust the variables in the *:root* element as you see fit
 3. Overwrite the file in the CSS folder of your application with the customised file
+4. Do not change any CSS other than the variables provided in the *-variables.css file
 
 ### CSS Upgrading
 To upgrade the CSS in this module, follow the [steps outlined in this repo](https://github.com/stadium-software/samples-upgrading)
