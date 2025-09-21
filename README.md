@@ -3,13 +3,12 @@
 A search API looks up a location from a textual description or address. 
 
 This module integrates the free Nominatim API of OpenStreetMap. Please make sure you adhere to the [usage policies](https://operations.osmfoundation.org/policies/nominatim/). 
-
-
 https://github.com/user-attachments/assets/8284de7b-7015-49fd-af5a-355c7c66f75a
-
 
 ## Version 
 1.0.1 Updated for Stadium 6.12
+
+1.1 Integrated CSS into script; added icon color to css variables
 
 # Setup
 
@@ -28,7 +27,7 @@ The module calls the https://nominatim.openstreetmap.org/search API to enable ad
 3. Drag a *JavaScript* action into the script
 4. Add the Javascript below unchanged into the JavaScript code property
 ```javascript
-/* Stadium Script v1.0 https://github.com/stadium-software/address-lookup-openstreetmap */
+/* Stadium Script v1.1 https://github.com/stadium-software/address-lookup-openstreetmap */
 let classname = ~.Parameters.Input.ClassName;
 let limit = ~.Parameters.Input.MaxResultsCount;
 let countryCodes = ~.Parameters.Input.CountryCodes;
@@ -77,6 +76,7 @@ lookupInput.addEventListener("keyup", function () {
 lookupInput.addEventListener("paste", function () {
     lookup();
 });
+loadCSS();
 removeResults();
 
 function lookup() {
@@ -137,6 +137,57 @@ function setDMValues(ob, property, value) {
     let obname = getObjectName(ob);
     scope[`${obname}${property}`] = value;
 }
+function loadCSS() {
+    let moduleID = "stadium-address-lookup";
+    if (!document.getElementById(moduleID)) {
+        let cssMain = document.createElement("style");
+        cssMain.id = moduleID;
+        cssMain.type = "text/css";
+        cssMain.textContent = `
+.address-lookup-osm {
+    position: relative;
+    .results-container {
+        position: absolute;
+        overflow: auto;
+        width: max-content;
+        top: 100%;
+        background-color: var(--address-lookup-results-container-background-color, var(--BODY-BACKGROUND-COLOR));
+        border: 1px solid var(--address-lookup-results-container-border-color, var(--BODY-FONT-COLOR));
+    }
+    .lookup-result {
+        cursor: pointer;
+        padding: 0.6rem;
+        font-size: var(--address-lookup-results-item-font-size, var(--DATA-GRID-HEADER-CELL-FONT-SIZE));
+        color: var(--address-lookup-results-item-font-color, var(--BODY-FONT-COLOR));
+    }
+    .lookup-result:hover {
+        background-color: var(--address-lookup-results-item-hover-color, var(--LIGHT-GREY));
+    }
+}
+.address-lookup-osm.looking-up:after {
+    content: "";
+    background-color: var(--address-lookup-textbox-active-icon-color, var(--BODY-FONT-COLOR));
+    mask-image: var(--address-lookup-textbox-active-icon, url("data: image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 24 24' %3E%3Ccircle cx='4' cy='12' r='3' fill='currentColor'%3E%3Canimate id='SVG7x14Dcom' fill='freeze' attributeName='opacity' begin='0;SVGqSjG0dUp.end-0.25s' dur='0.75s' values='1;.2'/%3E%3C/circle%3E%3Ccircle cx='12' cy='12' r='3' fill='currentColor' opacity='.4'%3E%3Canimate fill='freeze' attributeName='opacity' begin='SVG7x14Dcom.begin+0.15s' dur='0.75s' values='1;.2'/%3E%3C/circle%3E%3Ccircle cx='20' cy='12' r='3' fill='currentColor' opacity='.3'%3E%3Canimate id='SVGqSjG0dUp' fill='freeze' attributeName='opacity' begin='SVG7x14Dcom.begin+0.3s' dur='0.75s' values='1;.2'/%3E%3C/circle%3E%3C/svg%3E"));
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    position: absolute;
+    width: calc(var(--address-lookup-textbox-active-icon-size, 2.6rem) + .4rem);
+    height: 100%;
+    right: calc((var(--address-lookup-textbox-active-icon-size, 2.6rem) / 2) + 0.8rem);
+    top: 0;
+}
+.address-lookup-osm.looking-up input {
+    padding-right: calc(var(--address-lookup-textbox-active-icon-size, 2.6rem) + 1.2rem);
+}
+html {
+    min-height: 100%;
+    font-size: 62.5%;
+}
+        `;
+        document.head.appendChild(cssMain);
+    }
+}
 ```
 
 ## Custom Event Handler Script
@@ -180,24 +231,7 @@ function setDMValues(ob, property, value) {
 ```
 
 ## CSS
-The CSS below is required for the correct functioning of the module. Variables exposed in the [*address-lookup-variables.css*](address-lookup-variables.css) file can be [customised](#customising-css).
-
-### Before v6.12
-1. Create a folder called "CSS" inside of your Embedded Files in your application
-2. Drag the two CSS files from this repo [*address-lookup-variables.css*](address-lookup-variables.css) and [*address-lookup.css*](address-lookup.css) into that folder
-3. Paste the link tags below into the *head* property of your application
-```html
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/address-lookup.css">
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/address-lookup-variables.css">
-``` 
-
-### v6.12+
-1. Create a folder called "CSS" inside of your Embedded Files in your application
-2. Drag the CSS files from this repo [*address-lookup.css*](address-lookup.css) into that folder
-3. Paste the link tag below into the *head* property of your application
-```html
-<link rel="stylesheet" href="{EmbeddedFiles}/CSS/address-lookup.css">
-``` 
+Variables exposed in the [*address-lookup-variables.css*](address-lookup-variables.css) file can be [customised](#customising-css).
 
 ### Customising CSS
 1. Open the CSS file called [*address-lookup-variables.css*](address-lookup-variables.css) from this repo
